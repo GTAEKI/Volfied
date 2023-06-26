@@ -3,12 +3,20 @@ using System.Diagnostics.Metrics;
 using System.Threading;
 using System.Timers;
 
-namespace MemoryOfVofied
+namespace MemoryOfVolfied
 {
     public class BlockBreaker
     {
-        const int MAP_SIZE_Y = 30;
+        const int MAP_SIZE_Y = 20;
         const int MAP_SIZE_X = 40;
+
+        enum BossPlace
+        {
+            IS_INSIDE,
+            IS_OUTSIDE,
+            IS_LEFT,
+            IS_RIGHT
+        }
 
 
         public void Move(ConsoleKeyInfo key, ref string[,] mapBasic, ref int myLocationX,ref int myLocationY) // 구성 생각 필요
@@ -272,55 +280,106 @@ namespace MemoryOfVofied
 
         public void ResetMap(ref string[,] mapBasic) // 다시 기존 벽으로 돌아갔을때 땅 따먹기
         {
-            int bossLocationY = 0, bossLocationX = 0;
+            int bossY = 0, bossX = 0;
+            int compareX = 0;
             int firstX = 0, secondX = 0;
+            int firstY = 0, secondY = 0;
+            bool isSameLineY = default, isSameLineX = default;
 
-            for (int y = 1; y < MAP_SIZE_Y; y++) // 보스몬스터 위치로 땅 따먹은 부분 체크용
+            BossPlace bossPlace = default;
+
+            // 보스몬스터 위치 저장{
+            for (int y = 1; y < MAP_SIZE_Y; y++) 
             {
                 for (int x = 1; x < MAP_SIZE_X; x++)
                 {
                     if (mapBasic[y, x] == "Ω")
                     {
-                        bossLocationY = y;
-                        bossLocationX = x;
+                        bossY = y;
+                        bossX = x;
                     }
                 }//for x
             }//for y
+             // }보스몬스터 위치 저장
 
 
-           for(int x = 1; x < MAP_SIZE_X; x++)
+            isSameLineY = IsSameLineY(ref mapBasic,bossY, ref compareX);
+
+            if(isSameLineY == true)
             {
-                if (mapBasic[bossLocationY,x] == "⊙"&& mapBasic[bossLocationY, x+1] == "⊙")
+                if(bossX > compareX)
                 {
-                    
-                    for(int x2 = x; x2<MAP_SIZE_X; x2++)
+                    for (int x = 1; compareX+1> x ; x++)
                     {
-                        if(mapBasic[bossLocationY, x] == "⊙" && mapBasic[bossLocationY, x + 1] == " ")
+                        for(int y = 2; y < MAP_SIZE_Y - 1; y++)
                         {
-                            
-                        }
+                            if(mapBasic[y, compareX] == "⊙")
+                            {
+                                if (mapBasic[y,x]== "♀")
+                                {
+                                    continue;
+                                }
+                                mapBasic[y, x] = "▣";
+                                
+                            }                            
+                        }                        
                     }
                 }
-                //다음 순서 
-                //else if (mapBasic[bossLocationY, x] == "⊙" && mapBasic[bossLocationY, x + 1] == "⊙")
-                //{
+            }//isSameLineY true
 
-                //    for (int x2 = x; x2 < MAP_SIZE_X; x2++)
-                //    {
-                //        if (mapBasic[bossLocationY, x] == "⊙" && mapBasic[bossLocationY, x + 1] == " ")
-                //        {
 
-                //        }
-                //    }
-                //}
-            }
+
+
+
+            //// 보스몬스터 위치에 다른 수행
+            //switch (bossPlace)
+            //{
+            //    case BossPlace.IS_INSIDE:
+            //        Console.SetCursorPosition(5, 5);
+            //        Console.WriteLine("IS INSIDE");
+            //        break;
+            //    case BossPlace.IS_OUTSIDE:
+            //        Console.SetCursorPosition(5, 5);
+            //        Console.WriteLine("IS OUTSIDE");
+            //        break;
+            //    case BossPlace.IS_LEFT:
+            //        Console.SetCursorPosition(5, 5);
+            //        Console.WriteLine("IS LEFT");
+            //        break;
+            //    case BossPlace.IS_RIGHT:
+            //        Console.SetCursorPosition(5, 5);
+            //        Console.WriteLine("IS RIGHT");
+            //        break;
+            //    default:
+            //        break;
+            //}//switch
+            //// 보스몬스터 위치에 다른 수행
+
         }//ResetMap();
+
+
+
+        bool IsSameLineY(ref string[,] mapBasic,int bossY,ref int compareX) // y값 기준 같은 라인에 동그라미가 있다면 true, 아니면 false
+        {
+
+            for (int x = 2; x < MAP_SIZE_X - 1; x++)
+            {
+                if (mapBasic[bossY, x] == "⊙")
+                {
+                    compareX = x;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        
 
 
         //이전 버전
         //public void ResetMap(ref string[,] mapBasic) // 다시 기존 벽으로 돌아갔을때 땅 따먹기
         //{
-        //    int bossLocationY = 0, bossLocationX = 0;
+        //    int bossY = 0, bossX = 0;
 
         //    for (int y = 1; y < MAP_SIZE_Y; y++) // 보스몬스터 위치로 땅 따먹은 부분 체크용
         //    {
@@ -328,8 +387,8 @@ namespace MemoryOfVofied
         //        {
         //            if (mapBasic[y, x] == "Ω")
         //            {
-        //                bossLocationY = y;
-        //                bossLocationX = x;
+        //                bossY = y;
+        //                bossX = x;
         //            }
         //        }//for x
         //    }//for y

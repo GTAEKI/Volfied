@@ -3,12 +3,12 @@ using System.Diagnostics.Metrics;
 using System.Threading;
 using System.Timers;
 
-namespace MemoryOfVofied
+namespace MemoryOfVolfied
 {
 	public class Map
 	{
 
-        const int MAP_SIZE_Y = 30;
+        const int MAP_SIZE_Y = 20;
         const int MAP_SIZE_X = 40;
 
         // 초기 맵 배열에 벽과 보스, 내 캐릭터를 입력하는 함수

@@ -3,13 +3,13 @@ using System.Diagnostics.Metrics;
 using System.Threading;
 using System.Timers;
 
-namespace MemoryOfVofied
+namespace MemoryOfVolfied
 {
     internal class Program
     {
         static Map firstRoundMap = new Map(); //첫번째 라운드 맵 객체 생성
         
-        const int MAP_SIZE_Y = 30;
+        const int MAP_SIZE_Y = 20;
         const int MAP_SIZE_X = 40;
         static string[,] mapBasic = new string[MAP_SIZE_Y+1, MAP_SIZE_X+1];
         static int bossLocationY = 0, bossLocationX = 0;
@@ -38,11 +38,12 @@ namespace MemoryOfVofied
             
             firstRoundMap.CreateMap(ref mapBasic, ref myLocationY, ref myLocationX); // 맵 배열에 초기값 입력
 
-            System.Threading.Timer time = new System.Threading.Timer(MoveMonster, null, 10, 50);
+            //System.Threading.Timer time = new System.Threading.Timer(MoveMonster, null, 10, 50);
 
             while (true)
             {
-                Console.Clear();
+                //Console.Clear();
+                //Console.SetCursorPosition(0, 0);
                 firstRoundMap.PrintMap(ref mapBasic); // 콘솔에 반복 출력
                 key = Console.ReadKey(true); //키입력
                 blockBreaker.Move(key,ref mapBasic, ref myLocationY, ref myLocationX); // 주인공 캐릭터 움직임                

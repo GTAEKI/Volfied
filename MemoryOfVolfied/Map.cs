@@ -101,9 +101,7 @@ namespace MemoryOfVolfied
                 Console.WriteLine();
             }//for y
         }//printMap
-        //콘솔창에 배열에 있는 맵을 프린트하여 보여주는 함수
-
-           
+        //콘솔창에 배열에 있는 맵을 프린트하여 보여주는 함수   
 	}
 }
 

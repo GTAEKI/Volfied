@@ -36,20 +36,26 @@ namespace MemoryOfVolfied
                             myLocationY -= 1;
                             break;
                         }
+                        else if (mapBasic[myLocationY - 2, myLocationX] == "⊙" || mapBasic[myLocationY -1, myLocationX + 1] == "⊙" || mapBasic[myLocationY - 1, myLocationX - 1] == "⊙")
+                        {
+                            break;
+                        }
                         mapBasic[myLocationY - 1, myLocationX] = "♀";
                         mapBasic[myLocationY, myLocationX] = "⊙";
                         myLocationY -= 1;
                             break;
 
                     case "▣":
-                        //if (mapBasic[myLocationY, myLocationX + 1] == " " && mapBasic[myLocationY, myLocationX - 1] == " ")
-                        //{
-                        //    mapBasic[myLocationY - 1, myLocationX] = "♀";
-                        //    mapBasic[myLocationY, myLocationX] = "⊙";
-                        //    myLocationY -= 1;
-                        //    ResetMap(ref mapBasic);
-                        //    break;
-                        //}
+                        //0.1.1 에서 살림
+                        if (mapBasic[myLocationY, myLocationX + 1] == " " && mapBasic[myLocationY, myLocationX - 1] == " ")
+                        {
+                            mapBasic[myLocationY - 1, myLocationX] = "♀";
+                            mapBasic[myLocationY, myLocationX] = "⊙";
+                            myLocationY -= 1;
+                            ResetMap(ref mapBasic);
+                            break;
+                        }
+                        //0.1.1 에서 살림
 
                         //else if(mapBasic[myLocationY, myLocationX + 1] == "▣"||mapBasic[myLocationY, myLocationX - 1] == "▣"|| mapBasic[myLocationY, myLocationX + 1] == "⊙" || mapBasic[myLocationY, myLocationX - 1] == "⊙")
                         //{//문제있는 라인
@@ -64,16 +70,7 @@ namespace MemoryOfVolfied
                         myLocationY -= 1;
                         break;
 
-                    case "⊙":
-                        if (mapBasic[myLocationY, myLocationX+1] == "▣" && mapBasic[myLocationY, myLocationX-1] == "▣")
-                        {
-                            mapBasic[myLocationY-1, myLocationX] = "♀";
-                            mapBasic[myLocationY, myLocationX] = "▣";
-                            myLocationY -= 1;
-                            break;
-                        }
-                        
-                        break;
+
 
 
                     case "Ω": // 게임오버 추후 처리 필요
@@ -99,20 +96,26 @@ namespace MemoryOfVolfied
                             myLocationX -= 1;
                             break;
                         }
+                        else if (mapBasic[myLocationY, myLocationX-2] == "⊙" || mapBasic[myLocationY - 1, myLocationX - 1] == "⊙" || mapBasic[myLocationY + 1, myLocationX - 1] == "⊙")
+                        {
+                            break;
+                        }
                         mapBasic[myLocationY, myLocationX-1] = "♀";
                         mapBasic[myLocationY, myLocationX] = "⊙";
                         myLocationX -= 1;
                         break;
 
                     case "▣":
-                        //if (mapBasic[myLocationY-1, myLocationX] == " " && mapBasic[myLocationY+1, myLocationX] == " ")
-                        //{
-                        //    mapBasic[myLocationY, myLocationX-1] = "♀";
-                        //    mapBasic[myLocationY, myLocationX] = "⊙";
-                        //    myLocationX -= 1;
-                        //    ResetMap(ref mapBasic);
-                        //    break;
-                        //}
+                        // 0.1.1 에서 살림
+                        if (mapBasic[myLocationY - 1, myLocationX] == " " && mapBasic[myLocationY + 1, myLocationX] == " ")
+                        {
+                            mapBasic[myLocationY, myLocationX - 1] = "♀";
+                            mapBasic[myLocationY, myLocationX] = "⊙";
+                            myLocationX -= 1;
+                            ResetMap(ref mapBasic);
+                            break;
+                        }
+                        //0.1.1 에서 살림
 
                         //else if (mapBasic[myLocationY - 1, myLocationX] == "▣" || mapBasic[myLocationY + 1, myLocationX] == "▣"|| mapBasic[myLocationY - 1, myLocationX] == "⊙" || mapBasic[myLocationY + 1, myLocationX] == "⊙")
                         //{//문제있는 라인
@@ -126,16 +129,7 @@ namespace MemoryOfVolfied
                         swap(ref mapBasic[myLocationY, myLocationX], ref mapBasic[myLocationY, myLocationX-1]);
                         myLocationX -= 1;
                         break;
-                    case "⊙":
-                        if (mapBasic[myLocationY-1, myLocationX] == "▣" && mapBasic[myLocationY+1, myLocationX] == "▣")
-                        {
-                            mapBasic[myLocationY, myLocationX - 1] = "♀";
-                            mapBasic[myLocationY, myLocationX] = "▣";
-                            myLocationX -= 1;
-                            break;
-                        }
-                        
-                        break;
+
 
                     case "Ω": //처리필요
                         Console.WriteLine("보스와 만나서 사망");
@@ -158,20 +152,26 @@ namespace MemoryOfVolfied
                             myLocationY += 1;
                             break;
                         }
+                        else if (mapBasic[myLocationY+2, myLocationX] == "⊙" || mapBasic[myLocationY + 1, myLocationX + 1] == "⊙" || mapBasic[myLocationY + 1, myLocationX - 1] == "⊙")
+                        {
+                            break;
+                        }
                         mapBasic[myLocationY + 1, myLocationX] = "♀";
                         mapBasic[myLocationY, myLocationX] = "⊙";
                         myLocationY += 1;
                         break;
 
                     case "▣":
-                        //if (mapBasic[myLocationY, myLocationX + 1] == " " && mapBasic[myLocationY, myLocationX - 1] == " ")
-                        //{
-                        //    mapBasic[myLocationY + 1, myLocationX] = "♀";
-                        //    mapBasic[myLocationY, myLocationX] = "⊙";
-                        //    myLocationY += 1;
-                        //    ResetMap(ref mapBasic);
-                        //    break;
-                        //}
+                        //0.1.1 에서 살림
+                        if (mapBasic[myLocationY, myLocationX + 1] == " " && mapBasic[myLocationY, myLocationX - 1] == " ")
+                        {
+                            mapBasic[myLocationY + 1, myLocationX] = "♀";
+                            mapBasic[myLocationY, myLocationX] = "⊙";
+                            myLocationY += 1;
+                            ResetMap(ref mapBasic);
+                            break;
+                        }
+                        //0.1.1 에서 살림
 
                         //else if (mapBasic[myLocationY, myLocationX + 1] == "▣" || mapBasic[myLocationY, myLocationX - 1] == "▣"|| mapBasic[myLocationY, myLocationX + 1] == "⊙" || mapBasic[myLocationY, myLocationX - 1] == "⊙")
                         //{//문제있는 라인
@@ -185,16 +185,7 @@ namespace MemoryOfVolfied
                         swap(ref mapBasic[myLocationY, myLocationX], ref mapBasic[myLocationY + 1, myLocationX]);
                         myLocationY += 1;
                         break;
-                    case "⊙":
-                        if (mapBasic[myLocationY, myLocationX + 1] == "▣" && mapBasic[myLocationY, myLocationX - 1] == "▣")
-                        {
-                            mapBasic[myLocationY + 1, myLocationX] = "♀";
-                            mapBasic[myLocationY, myLocationX] = "▣";
-                            myLocationY += 1;
-                            break;
-                        }
-                      
-                        break;
+
                     case "Ω": //처리필요
                         Console.WriteLine("보스와 만나서 사망");
                         Thread.Sleep(3000);
@@ -218,22 +209,27 @@ namespace MemoryOfVolfied
                             myLocationX += 1;
                             break;
                         }
+                        else if (mapBasic[myLocationY,myLocationX+2] == "⊙" || mapBasic[myLocationY+1, myLocationX + 1] == "⊙" || mapBasic[myLocationY - 1, myLocationX + 1] == "⊙")
+                        {
+                            break;
+                        }
                         mapBasic[myLocationY, myLocationX + 1] = "♀";
                         mapBasic[myLocationY, myLocationX] = "⊙";
                         myLocationX += 1;
                         break;
 
                     case "▣":
-                        
 
-                        //if (mapBasic[myLocationY+1, myLocationX] == " " && mapBasic[myLocationY-1, myLocationY] == " ")
-                        //{
-                        //    mapBasic[myLocationY, myLocationX+1] = "♀";
-                        //    mapBasic[myLocationY, myLocationX] = "⊙";
-                        //    myLocationX += 1;
-                        //    ResetMap(ref mapBasic);
-                        //    break;
-                        //}
+                        //0.1.1 에서 살림
+                        if (mapBasic[myLocationY + 1, myLocationX] == " " && mapBasic[myLocationY - 1, myLocationY] == " ")
+                        {
+                            mapBasic[myLocationY, myLocationX + 1] = "♀";
+                            mapBasic[myLocationY, myLocationX] = "⊙";
+                            myLocationX += 1;
+                            ResetMap(ref mapBasic);
+                            break;
+                        }
+                        //0.1.1 에서 살림
 
                         //else if (mapBasic[myLocationY + 1, myLocationX] == "▣" || mapBasic[myLocationY - 1, myLocationY] == "▣"|| mapBasic[myLocationY + 1, myLocationX] == "⊙" || mapBasic[myLocationY - 1, myLocationY] == "⊙")
                         //{//문제있는 라인
@@ -246,17 +242,6 @@ namespace MemoryOfVolfied
 
                         swap(ref mapBasic[myLocationY, myLocationX], ref mapBasic[myLocationY, myLocationX + 1]);
                         myLocationX += 1;
-                        break;
-
-                    case "⊙":
-                        if (mapBasic[myLocationY+1, myLocationX] == "▣" && mapBasic[myLocationY-1, myLocationX] == "▣")
-                        {
-                            mapBasic[myLocationY, myLocationX+1] = "♀";
-                            mapBasic[myLocationY, myLocationX] = "▣";
-                            myLocationX += 1;
-                            break;
-                        }
-                        
                         break;
 
                     case "Ω": //처리필요
@@ -282,6 +267,7 @@ namespace MemoryOfVolfied
         {
             int bossY = 0, bossX = 0;
             int compareX = 0;
+            int saveX = 0;
             int firstX = 0, secondX = 0;
             int firstY = 0, secondY = 0;
             bool isSameLineY = default, isSameLineX = default;
@@ -305,32 +291,79 @@ namespace MemoryOfVolfied
 
             isSameLineY = IsSameLineY(ref mapBasic,bossY, ref compareX);
 
-            if(isSameLineY == true)
+
+            if (isSameLineY == true)
             {
-                if(bossX > compareX)
+                if (bossX > compareX)
                 {
-                    for (int x = 1; compareX+1> x ; x++)
+                    for(int y = 0; MAP_SIZE_Y > y; y++)
                     {
-                        for(int y = 2; y < MAP_SIZE_Y - 1; y++)
+                        for(int x = MAP_SIZE_X; x > 0; x--)
                         {
-                            if(mapBasic[y, compareX] == "⊙")
+                            if (mapBasic[y,x] == "⊙")
                             {
-                                if (mapBasic[y,x]== "♀")
-                                {
-                                    continue;
-                                }
                                 mapBasic[y, x] = "▣";
-                                
-                            }                            
-                        }                        
+                                while (true)
+                                {                                    
+                                    if (mapBasic[y,x-1] == "⊙")
+                                    {
+                                        mapBasic[y, x - 1] = "▣";
+                                        if (mapBasic[y, x-2]==" ")
+                                        {  // 공백일때 y축 기준으로 쭉 내렸을때                                         {
+                                            //while (true)
+                                            //{ y-=1;
+                                            //    mapBasic[y,x-2]=
+                                            //}
+                                            break;
+                                        }
+                                        else if(mapBasic[y, x - 2] == "▣" || mapBasic[y, x - 2] == "♀")
+                                        {
+                                            break;
+                                        }
+                                    }
+                                    else if (mapBasic[y,x-1] == " ")
+                                    {
+                                        mapBasic[y, x-1] = "▣";
+                                    }
+                                    else if (mapBasic[y,x-1]== "▣")
+                                    {
+                                        break;
+                                    }
+                                    x -= 1;                                    
+                                }
+                                break;
+                            }
+                        }
                     }
                 }
             }//isSameLineY true
 
+            //0.1.1
+            //if (isSameLineY == true)
+            //{
+            //    if (bossX > compareX)
+            //    {
+            //        for (int x = 1; MAP_SIZE_X > x; x++)
+            //        {
+            //            for (int y = 2; y < MAP_SIZE_Y - 1; y++)
+            //            {
+            //                if (mapBasic[y, x] == "⊙")
+            //                {
+            //                    if (mapBasic[y, x] == "♀")
+            //                    {
+            //                        continue;
+            //                    }
+            //                    mapBasic[y, x] = "▣";
+            //                }
+            //            }
+            //        }
+            //    }
+            //}//isSameLineY true
+            //0.1.1
 
 
 
-
+            //0.1.0
             //// 보스몬스터 위치에 다른 수행
             //switch (bossPlace)
             //{
@@ -354,6 +387,7 @@ namespace MemoryOfVolfied
             //        break;
             //}//switch
             //// 보스몬스터 위치에 다른 수행
+            // 0.1.0
 
         }//ResetMap();
 
@@ -375,7 +409,7 @@ namespace MemoryOfVolfied
 
         
 
-
+        //0.1.0
         //이전 버전
         //public void ResetMap(ref string[,] mapBasic) // 다시 기존 벽으로 돌아갔을때 땅 따먹기
         //{
@@ -414,6 +448,7 @@ namespace MemoryOfVolfied
         //        }//for x
         //    }//for y
         //}//ResetMap();
+        //0.1.0
     }
 }
 

@@ -8,7 +8,7 @@ namespace MemoryOfVolfied
 	public class Map
 	{
 
-        const int MAP_SIZE_Y = 20;
+        const int MAP_SIZE_Y = 30;
         const int MAP_SIZE_X = 40;
 
         // 초기 맵 배열에 벽과 보스, 내 캐릭터를 입력하는 함수
@@ -52,56 +52,103 @@ namespace MemoryOfVolfied
         }//createMap
         // 초기 맵 배열에 벽과 보스, 내 캐릭터를 입력하는 함수
 
-        //적군을 랜덤으로 생성하는 함수
-        public void MakeEnemy(ref string[,] mapBasic)
-        {
-            Random rand = new Random();
-            int count = 0;
-
-            while (count < 50)
-            {
-                int randomY = rand.Next(0, MAP_SIZE_Y);
-                int randomX = rand.Next(0, MAP_SIZE_X);
-
-                bool isDuplicate = false;
-
-                if (mapBasic[randomY, randomX] == "▣" || mapBasic[randomY, randomX] == "♀")
-                {
-                    isDuplicate = true;
-
-                }
-
-                if (!isDuplicate)
-                {
-                    mapBasic[randomY, randomX] = "Ω";
-                    count += 1;
-                }
-            }//while
-        }//MakeEnemy
-        //적군을 랜덤으로 생성하는 함수
 
         //콘솔창에 배열에있는 맵을 프린트하여 보여주는 함수
         public void PrintMap(ref string[,] mapBasic)
-        {
+        {     
             for (int y = 0; y < MAP_SIZE_Y; y++)
             {
+                //Console.SetCursorPosition(0, y);
                 for (int x = 0; x < MAP_SIZE_X; x++)
                 {
-                    if (mapBasic[y,x] == "ж")
-                    {
-                        Console.ForegroundColor = ConsoleColor.Red;
                         Console.Write("{0} ", mapBasic[y, x]);
-                        Console.ResetColor();
-                    }
-                    else
-                    {
-                        Console.Write("{0} ", mapBasic[y, x]);
-                    }
                 }
                 Console.WriteLine();
             }//for y
         }//printMap
-        //콘솔창에 배열에 있는 맵을 프린트하여 보여주는 함수   
+        //콘솔창에 배열에 있는 맵을 프린트하여 보여주는 함수
+
+        // 땅 점령률을 계산하는 함수
+        public float CalculatePercent(string[,] mapBasic)
+        {
+            float count = 0;
+            float percent = 0;
+            float area = (MAP_SIZE_Y - 4) * (MAP_SIZE_X - 4);
+
+            for (int y = 2; y < MAP_SIZE_Y-2; y++)
+            {
+                for(int x = 2; x< MAP_SIZE_X-2; x++)
+                {
+                    if (mapBasic[y,x]== "▣"|| mapBasic[y, x] == "♀")
+                    {
+                        count += 1;
+                    }
+                }
+            }
+
+            percent = (count / area) * 100;
+
+            return percent;
+        }
+        // 땅 점령률을 계산하는 함수
+
+        // 점수 계산하는 함수
+        public int CalculateScore(string[,] mapBasic,ref int remainCount)
+        {
+            int count = 0;
+            int score_ = 0;
+            int area = (MAP_SIZE_Y - 4) * (MAP_SIZE_X - 4);
+
+
+            for (int y = 2; y < MAP_SIZE_Y - 2; y++)
+            {
+                for (int x = 2; x < MAP_SIZE_X - 2; x++)
+                {
+                    if (mapBasic[y, x] == "▣"|| mapBasic[y, x] == "♀")
+                    {
+                        count += 1;
+                    }
+                }
+            }
+
+            count -= remainCount;
+
+            //점수 계산 공식
+            if(count < area*1/100)
+            {
+                score_ = count * 2;
+            }
+            else if(count < area * 5 / 100)
+            {
+                score_ = count * 150;
+            }
+            else if(count < area * 8 / 100)
+            {
+                score_ = count * 500;
+            }
+            else if (count < area * 15 / 100)
+            {
+                score_ = count * 700;
+            }
+            else if (count < area * 30 / 100)
+            {
+                score_ = count * 1530;
+            }
+            else if (count < area * 50 / 100)
+            {
+                score_ = count * 3200;
+            }
+            else
+            {
+                score_ = count * 5000;
+            }
+            //점수 계산 공식
+
+            remainCount += count;
+
+            return score_;
+        }
+        // 점수 계산하는 함수
 	}
 }
 

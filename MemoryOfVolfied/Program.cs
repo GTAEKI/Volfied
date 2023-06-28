@@ -2,23 +2,25 @@
 using System.Diagnostics.Metrics;
 using System.Threading;
 using System.Timers;
+using static System.Formats.Asn1.AsnWriter;
 
 namespace MemoryOfVolfied
 {
     internal class Program
     {
         static Map firstRoundMap = new Map(); //첫번째 라운드 맵 객체 생성
-        
-        const int MAP_SIZE_Y = 20;
+        static Scene sceneManager = new Scene(); //Scene관리 객체
+
+        static int score = default, remaincount = default, highScore = default;
+        static float successRate = default;
+        const int MAP_SIZE_Y = 30;
         const int MAP_SIZE_X = 40;
         static string[,] mapBasic = new string[MAP_SIZE_Y+1, MAP_SIZE_X+1];
-        static int bossLocationY = 0, bossLocationX = 0;
-        //static Random random = default;
         static Direction bossDirection = default;
-
 
         static bool IsClockwise = true;
 
+        //보스몹 움직이는 방향
         enum Direction
         {
             UPPER_LEFT,
@@ -26,34 +28,54 @@ namespace MemoryOfVolfied
             BOTTOM_LEFT,
             BOTTOM_RIGHT
         }
+        //보스몹 움직이는 방향
 
         static void Main(string[] args)
         {
+            //Console.SetWindowSize(MAP_SIZE_X*2, MAP_SIZE_Y); //window에서 플레이할때 (mac에서 지원 안함)
+
             ConsoleKeyInfo key = default;
+            Console.CursorVisible = false; //window에서 플레이할때 의미있음, mac에서 지원 안함
             bossDirection = Direction.UPPER_LEFT;
             
             int myLocationY = 0, myLocationX = 0;
 
             BlockBreaker blockBreaker = new BlockBreaker(); // 주인공 캐릭터 생성
             
+
+            sceneManager.StartScene();
             firstRoundMap.CreateMap(ref mapBasic, ref myLocationY, ref myLocationX); // 맵 배열에 초기값 입력
 
-            System.Threading.Timer time = new System.Threading.Timer(MoveMonster, null, 10, 50);
+            System.Threading.Timer time = new System.Threading.Timer(MoveMonster, null, 10, 70);
 
             while (true)
             {
                 Console.Clear();
-                //Console.SetCursorPosition(0, 0);
+                successRate = firstRoundMap.CalculatePercent(mapBasic);
+                score += firstRoundMap.CalculateScore(mapBasic, ref remaincount);
+                sceneManager.ScorePointScore(mapBasic,successRate, score, highScore);
+                //Console.WriteLine("{0}", firstRoundMap.CalculatePoint(mapBasic));
                 firstRoundMap.PrintMap(ref mapBasic); // 콘솔에 반복 출력
                 key = Console.ReadKey(true); //키입력
-                blockBreaker.Move(key,ref mapBasic, ref myLocationY, ref myLocationX); // 주인공 캐릭터 움직임                
+                blockBreaker.Move(key,ref mapBasic, ref myLocationY, ref myLocationX); // 주인공 캐릭터 움직임
+                if(successRate > 80)
+                {
+                    sceneManager.GameClear();
+                }
             }//while
         }//Main
 
+        //보스 움직임 구현 (타이머에 맞춰서 실행)
         static void MoveMonster(object place)
-        {            
-            Console.SetCursorPosition(0,0);
+        {
+            Console.Clear();
+            sceneManager.ScorePointScore(mapBasic, successRate, score, highScore);
             firstRoundMap.PrintMap(ref mapBasic);
+
+            if (successRate > 80)
+            {
+                sceneManager.GameClear();
+            }
 
             for (int y = 0; y < MAP_SIZE_Y + 1; y++)
             {
@@ -82,7 +104,11 @@ namespace MemoryOfVolfied
                                             mapBasic[y, x] = " ";                                            
                                             mapBasic[y-1, x-1] = "Ω";
                                             return;
+                                        case "♀":                         
                                         case "⊙":
+                                            sceneManager.GameOverScene();
+                                            return;
+                                        default:
                                             return;
                                     }                            
                                 }
@@ -104,7 +130,11 @@ namespace MemoryOfVolfied
                                             mapBasic[y, x] = " ";
                                             mapBasic[y - 1, x - 1] = "Ω";
                                             return;
+                                        case "♀":
                                         case "⊙":
+                                            sceneManager.GameOverScene();
+                                            return;
+                                        default:
                                             return;
                                     }
                                 }
@@ -128,7 +158,11 @@ namespace MemoryOfVolfied
                                             mapBasic[y, x] = " ";
                                             mapBasic[y + 1, x - 1] = "Ω";
                                             return;
+                                        case "♀":
                                         case "⊙":
+                                            sceneManager.GameOverScene();
+                                            return;
+                                        default:
                                             return;
                                     }
                                 }
@@ -150,7 +184,11 @@ namespace MemoryOfVolfied
                                             mapBasic[y, x] = " ";
                                             mapBasic[y + 1, x - 1] = "Ω";
                                             return;
+                                        case "♀":
                                         case "⊙":
+                                            sceneManager.GameOverScene();
+                                            return;
+                                        default:
                                             return;
                                     }
                                 }
@@ -174,7 +212,11 @@ namespace MemoryOfVolfied
                                             mapBasic[y, x] = " ";
                                             mapBasic[y + 1, x + 1] = "Ω";
                                             return;
+                                        case "♀":
                                         case "⊙":
+                                            sceneManager.GameOverScene();
+                                            return;
+                                        default:
                                             return;
                                     }
                                 }
@@ -196,7 +238,11 @@ namespace MemoryOfVolfied
                                             mapBasic[y, x] = " ";
                                             mapBasic[y + 1, x + 1] = "Ω";
                                             return;
+                                        case "♀":
                                         case "⊙":
+                                            sceneManager.GameOverScene();
+                                            return;
+                                        default:
                                             return;
                                     }
                                 }
@@ -220,7 +266,11 @@ namespace MemoryOfVolfied
                                             mapBasic[y, x] = " ";
                                             mapBasic[y - 1, x + 1] = "Ω";
                                             return;
+                                        case "♀":
                                         case "⊙":
+                                            sceneManager.GameOverScene();
+                                            return;
+                                        default:
                                             return;
                                     }
                                 }
@@ -242,7 +292,11 @@ namespace MemoryOfVolfied
                                             mapBasic[y, x] = " ";
                                             mapBasic[y - 1, x + 1] = "Ω";
                                             return;
+                                        case "♀":
                                         case "⊙":
+                                            sceneManager.GameOverScene();
+                                            return;
+                                        default:
                                             return;
                                     }
                                 }

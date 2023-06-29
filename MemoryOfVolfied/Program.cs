@@ -10,7 +10,12 @@ namespace MemoryOfVolfied
     {
         static Map firstRoundMap = new Map(); //첫번째 라운드 맵 객체 생성
         static Scene sceneManager = new Scene(); //Scene관리 객체
+        static List<int> scoreRecord = new List<int>();
+        static Dictionary<int, string> infoRecord = new Dictionary<int,string>();
+        static System.Threading.Timer timer;
+        static bool lose = false;
 
+        static string name = default;
         static int score = default, remaincount = default, highScore = default;
         static float successRate = default;
         const int MAP_SIZE_Y = 30;
@@ -32,50 +37,85 @@ namespace MemoryOfVolfied
 
         static void Main(string[] args)
         {
-            //Console.SetWindowSize(MAP_SIZE_X*2, MAP_SIZE_Y); //window에서 플레이할때 (mac에서 지원 안함)
-
-            ConsoleKeyInfo key = default;
-            Console.CursorVisible = false; //window에서 플레이할때 의미있음, mac에서 지원 안함
-            bossDirection = Direction.UPPER_LEFT;
-            
-            int myLocationY = 0, myLocationX = 0;
-
-            BlockBreaker blockBreaker = new BlockBreaker(); // 주인공 캐릭터 생성
-            
-
             sceneManager.StartScene();
-            firstRoundMap.CreateMap(ref mapBasic, ref myLocationY, ref myLocationX); // 맵 배열에 초기값 입력
-
-            System.Threading.Timer time = new System.Threading.Timer(MoveMonster, null, 10, 70);
-
+            //Console.SetWindowSize(MAP_SIZE_X*2, MAP_SIZE_Y); //window에서 플레이할때 (mac에서 지원 안함)
             while (true)
             {
-                Console.Clear();
-                successRate = firstRoundMap.CalculatePercent(mapBasic);
-                score += firstRoundMap.CalculateScore(mapBasic, ref remaincount);
-                sceneManager.ScorePointScore(mapBasic,successRate, score, highScore);
-                //Console.WriteLine("{0}", firstRoundMap.CalculatePoint(mapBasic));
-                firstRoundMap.PrintMap(ref mapBasic); // 콘솔에 반복 출력
-                key = Console.ReadKey(true); //키입력
-                blockBreaker.Move(key,ref mapBasic, ref myLocationY, ref myLocationX); // 주인공 캐릭터 움직임
-                if(successRate > 80)
+
+                ConsoleKeyInfo key = default;
+                Console.CursorVisible = false; //window에서 플레이할때 의미있음, mac에서 지원 안함
+                bossDirection = Direction.UPPER_LEFT;
+            
+                int myLocationY = 0, myLocationX = 0;
+                remaincount = 0;
+
+                BlockBreaker blockBreaker = new BlockBreaker(); // 주인공 캐릭터 생성
+            
+
+                
+                firstRoundMap.CreateMap(ref mapBasic, ref myLocationY, ref myLocationX); // 맵 배열에 초기값 입력
+
+                timer = new System.Threading.Timer(MoveMonster, null, 10, 70);
+
+                while (true)
                 {
-                    sceneManager.GameClear();
-                }
-            }//while
+                    Console.Clear();
+                    successRate = firstRoundMap.CalculatePercent(mapBasic);
+                    score += firstRoundMap.CalculateScore(mapBasic, ref remaincount);
+
+                    if (scoreRecord.Count >= 1 && scoreRecord[0] > score)
+                    {
+                        highScore = scoreRecord[0]; //하이스코어 입력
+                    }
+                    else {
+                    highScore = score; //하이스코어 입력
+                    }
+
+                    sceneManager.ScorePointScore(mapBasic,successRate, score, highScore);
+                    firstRoundMap.PrintMap(ref mapBasic); // 콘솔에 반복 출력
+                    key = Console.ReadKey(true); // 키입력
+                    blockBreaker.Move(key,ref mapBasic, ref myLocationY, ref myLocationX, ref lose); // 주인공 캐릭터 움직임
+                    if(successRate > 80) //승리조건
+                    {
+                        StopTimer();
+                        sceneManager.GameClear();
+                        // 게임 승리시 리스트에 점수 추가
+                        sceneManager.ScoreRecordScene(ref name,ref score, ref scoreRecord, ref infoRecord);
+
+                        break;
+                    }
+                    else if(lose == true) //패배조건
+                    {
+                        StopTimer();
+                        sceneManager.GameOverScene();
+                        // 게임 패배시 리스트에 점수 추가
+                        sceneManager.ScoreRecordScene(ref name, ref score, ref scoreRecord, ref infoRecord);
+                        lose = false;
+
+                        break;
+                    }
+                }//while
+            }
+
+
+
         }//Main
 
-        //보스 움직임 구현 (타이머에 맞춰서 실행)
+
+        // 타이머 정지 함수
+        static void StopTimer() 
+        {
+            timer.Change(Timeout.Infinite, Timeout.Infinite);
+        }
+        // 타이머 정지 함수
+
+
+        //보스 움직임 구현 (타이머 실행)
         static void MoveMonster(object place)
         {
             Console.Clear();
             sceneManager.ScorePointScore(mapBasic, successRate, score, highScore);
             firstRoundMap.PrintMap(ref mapBasic);
-
-            if (successRate > 80)
-            {
-                sceneManager.GameClear();
-            }
 
             for (int y = 0; y < MAP_SIZE_Y + 1; y++)
             {
@@ -106,7 +146,8 @@ namespace MemoryOfVolfied
                                             return;
                                         case "♀":                         
                                         case "⊙":
-                                            sceneManager.GameOverScene();
+                                            lose = true;
+                                            //sceneManager.GameOverScene();
                                             return;
                                         default:
                                             return;
@@ -132,7 +173,8 @@ namespace MemoryOfVolfied
                                             return;
                                         case "♀":
                                         case "⊙":
-                                            sceneManager.GameOverScene();
+                                            lose = true;
+                                            //sceneManager.GameOverScene();
                                             return;
                                         default:
                                             return;
@@ -160,7 +202,8 @@ namespace MemoryOfVolfied
                                             return;
                                         case "♀":
                                         case "⊙":
-                                            sceneManager.GameOverScene();
+                                            lose = true;
+                                            //sceneManager.GameOverScene();
                                             return;
                                         default:
                                             return;
@@ -186,7 +229,8 @@ namespace MemoryOfVolfied
                                             return;
                                         case "♀":
                                         case "⊙":
-                                            sceneManager.GameOverScene();
+                                            lose = true;
+                                            //sceneManager.GameOverScene();
                                             return;
                                         default:
                                             return;
@@ -214,7 +258,8 @@ namespace MemoryOfVolfied
                                             return;
                                         case "♀":
                                         case "⊙":
-                                            sceneManager.GameOverScene();
+                                            lose = true;
+                                            //sceneManager.GameOverScene();
                                             return;
                                         default:
                                             return;
@@ -240,7 +285,8 @@ namespace MemoryOfVolfied
                                             return;
                                         case "♀":
                                         case "⊙":
-                                            sceneManager.GameOverScene();
+                                            lose = true;
+                                            //sceneManager.GameOverScene();
                                             return;
                                         default:
                                             return;
@@ -268,7 +314,8 @@ namespace MemoryOfVolfied
                                             return;
                                         case "♀":
                                         case "⊙":
-                                            sceneManager.GameOverScene();
+                                            lose = true;
+                                            //sceneManager.GameOverScene();
                                             return;
                                         default:
                                             return;
@@ -294,7 +341,8 @@ namespace MemoryOfVolfied
                                             return;
                                         case "♀":
                                         case "⊙":
-                                            sceneManager.GameOverScene();
+                                            lose = true;
+                                            //sceneManager.GameOverScene();
                                             return;
                                         default:
                                             return;
@@ -306,5 +354,8 @@ namespace MemoryOfVolfied
                 }
             }//for y
         }// MoveMonster
+        //보스 움직임 구현 (타이머 실행)
+
+
     }//Program
 }//nameSpace

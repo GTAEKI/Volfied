@@ -11,7 +11,7 @@ namespace MemoryOfVolfied
         const int MAP_SIZE_X = 40;
 
         // 내 캐릭터 움직이는 함수
-        public void Move(ConsoleKeyInfo key, ref string[,] mapBasic, ref int myLocationX,ref int myLocationY) // 구성 생각 필요
+        public void Move(ConsoleKeyInfo key, ref string[,] mapBasic, ref int myLocationX,ref int myLocationY, ref bool lose)
         {
             Random random = new Random();
             int bossX = 0, bossY = 0;
@@ -29,10 +29,7 @@ namespace MemoryOfVolfied
                             myLocationY -= 1;
                             break;
                         }
-                        else if (mapBasic[myLocationY - 2, myLocationX] == "⊙" || mapBasic[myLocationY -1, myLocationX + 1] == "⊙" || mapBasic[myLocationY - 1, myLocationX - 1] == "⊙")
-                        {
-                            break;
-                        }
+
                         mapBasic[myLocationY - 1, myLocationX] = "♀";
                         mapBasic[myLocationY, myLocationX] = "⊙";
                         myLocationY -= 1;
@@ -65,13 +62,12 @@ namespace MemoryOfVolfied
                         ChangeWall(ref mapBasic, "⊙", "▣");
                         break;
 
-                    case "Ω": // 게임오버 추후 처리 필요
-                        Console.WriteLine("보스와 만나서 사망");
-                        Thread.Sleep(3000);
+                    case "Ω":
+                        lose = true;
                         break;
 
                     default:
-                        Console.WriteLine("움직일 수 없습니다.");
+                        //Console.WriteLine("움직일 수 없습니다.");
                         break;
                 }
             }
@@ -86,10 +82,6 @@ namespace MemoryOfVolfied
                             mapBasic[myLocationY, myLocationX-1] = "♀";
                             mapBasic[myLocationY, myLocationX] = "▣";
                             myLocationX -= 1;
-                            break;
-                        }
-                        else if (mapBasic[myLocationY, myLocationX-2] == "⊙" || mapBasic[myLocationY - 1, myLocationX - 1] == "⊙" || mapBasic[myLocationY + 1, myLocationX - 1] == "⊙")
-                        {
                             break;
                         }
                         mapBasic[myLocationY, myLocationX-1] = "♀";
@@ -125,12 +117,12 @@ namespace MemoryOfVolfied
                         break;
 
 
-                    case "Ω": //처리필요
-                        Console.WriteLine("보스와 만나서 사망");
-                        Thread.Sleep(3000);
+                    case "Ω":
+                        lose = true;
                         break;
+
                     default:
-                        Console.WriteLine("움직일 수 없습니다.");
+                        //Console.WriteLine("움직일 수 없습니다.");
                         break;
                 }
             }
@@ -144,10 +136,6 @@ namespace MemoryOfVolfied
                             mapBasic[myLocationY + 1, myLocationX] = "♀";
                             mapBasic[myLocationY, myLocationX] = "▣";
                             myLocationY += 1;
-                            break;
-                        }
-                        else if (mapBasic[myLocationY+2, myLocationX] == "⊙" || mapBasic[myLocationY + 1, myLocationX + 1] == "⊙" || mapBasic[myLocationY + 1, myLocationX - 1] == "⊙")
-                        {
                             break;
                         }
                         mapBasic[myLocationY + 1, myLocationX] = "♀";
@@ -182,12 +170,12 @@ namespace MemoryOfVolfied
                         ChangeWall(ref mapBasic, "⊙", "▣");
                         break;
 
-                    case "Ω": //처리필요
-                        Console.WriteLine("보스와 만나서 사망");
-                        Thread.Sleep(3000);
+                    case "Ω":
+                        lose = true;
                         break;
+
                     default:
-                        Console.WriteLine("움직일 수 없습니다.");
+                        //Console.WriteLine("움직일 수 없습니다.");
                         break;
                 }
 
@@ -203,10 +191,6 @@ namespace MemoryOfVolfied
                             mapBasic[myLocationY, myLocationX + 1] = "♀";
                             mapBasic[myLocationY, myLocationX] = "▣";
                             myLocationX += 1;
-                            break;
-                        }
-                        else if (mapBasic[myLocationY,myLocationX+2] == "⊙" || mapBasic[myLocationY+1, myLocationX + 1] == "⊙" || mapBasic[myLocationY - 1, myLocationX + 1] == "⊙")
-                        {
                             break;
                         }
                         mapBasic[myLocationY, myLocationX + 1] = "♀";
@@ -239,14 +223,14 @@ namespace MemoryOfVolfied
                         ChangeWall(ref mapBasic, " ", "⊙");
                         ChangeWall(ref mapBasic, "▶", " ");
                         ChangeWall(ref mapBasic, "⊙", "▣");
-                        break;  
-
-                    case "Ω": //처리필요
-                        Console.WriteLine("보스와 만나서 사망");
-                        Thread.Sleep(3000);
                         break;
+
+                    case "Ω":
+                        lose = true;
+                        break;
+
                     default:
-                        Console.WriteLine("움직일 수 없습니다.");
+                        //Console.WriteLine("움직일 수 없습니다.");
                         break;
                 }
             }

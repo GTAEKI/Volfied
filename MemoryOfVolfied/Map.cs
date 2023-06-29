@@ -59,7 +59,6 @@ namespace MemoryOfVolfied
         {     
             for (int y = 0; y < MAP_SIZE_Y; y++)
             {
-                //Console.SetCursorPosition(0, y);
                 for (int x = 0; x < MAP_SIZE_X; x++)
                 {
                     if (mapBasic[y,x] == "°")
@@ -196,25 +195,25 @@ namespace MemoryOfVolfied
         }//printMap
         //콘솔창에 배열에 있는 맵을 프린트하여 보여주는 함수
 
-        //콘솔창에 배열에있는 맵을 프린트하여 보여주는 함수
-        public void BossPrintMap(ref string[,] mapBasic)
-        {
-            for (int y = 0; y < MAP_SIZE_Y; y++)
-            {
-                //Console.SetCursorPosition(0, y);
-                for (int x = 0; x < MAP_SIZE_X; x++)
-                {
-                    Console.SetCursorPosition(x, y);
-                    if (mapBasic[y,x]== "Ω")
-                    {
+        ////콘솔창에 배열에있는 맵을 프린트하여 보여주는 함수
+        //public void BossPrintMap(ref string[,] mapBasic)
+        //{
+        //    for (int y = 0; y < MAP_SIZE_Y; y++)
+        //    {
+        //        //Console.SetCursorPosition(0, y);
+        //        for (int x = 0; x < MAP_SIZE_X; x++)
+        //        {
+        //            Console.SetCursorPosition(x, y);
+        //            if (mapBasic[y,x]== "Ω")
+        //            {
                         
-                        Console.Write("{0} ", mapBasic[y, x]);
+        //                Console.Write("{0} ", mapBasic[y, x]);
 
-                    }
-                }
-            }//for y
-        }//printMap
-        //콘솔창에 배열에 있는 맵을 프린트하여 보여주는 함수
+        //            }
+        //        }
+        //    }//for y
+        //}//printMap
+        ////콘솔창에 배열에 있는 맵을 프린트하여 보여주는 함수
 
         // 땅 점령률을 계산하는 함수
         public float CalculatePercent(string[,] mapBasic)

@@ -55,11 +55,10 @@ namespace MemoryOfVolfied
                 
                 firstRoundMap.CreateMap(ref mapBasic, ref myLocationY, ref myLocationX); // 맵 배열에 초기값 입력
 
-                timer = new System.Threading.Timer(MoveMonster, null, 10, 70);
+                timer = new System.Threading.Timer(MoveMonster, null, 10, 100);
 
                 while (true)
                 {
-                    Console.Clear();
                     successRate = firstRoundMap.CalculatePercent(mapBasic);
                     score += firstRoundMap.CalculateScore(mapBasic, ref remaincount);
 
@@ -71,8 +70,7 @@ namespace MemoryOfVolfied
                     highScore = score; //하이스코어 입력
                     }
 
-                    sceneManager.ScorePointScore(mapBasic,successRate, score, highScore);
-                    firstRoundMap.PrintMap(ref mapBasic); // 콘솔에 반복 출력
+                    //sceneManager.ScorePointScore(mapBasic,successRate, score, highScore);
                     key = Console.ReadKey(true); // 키입력
                     blockBreaker.Move(key,ref mapBasic, ref myLocationY, ref myLocationX, ref lose); // 주인공 캐릭터 움직임
                     if(successRate > 80) //승리조건
@@ -355,7 +353,5 @@ namespace MemoryOfVolfied
             }//for y
         }// MoveMonster
         //보스 움직임 구현 (타이머 실행)
-
-
     }//Program
 }//nameSpace

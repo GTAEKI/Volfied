@@ -7,34 +7,34 @@ namespace MemoryOfVolfied
 {
 	public class Scene
 	{
-        public void ScorePointScore(string[,] mapBasic, float successRate,int score, int highScore)
+        public void ScorePointScore(string[,] mapBasic, float successRate, int score, int highScore)
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°");
             Console.WriteLine("°                                                                             °");
-            Console.WriteLine("°                                                                             °");
-            Console.WriteLine("°                                                                             °");
-            Console.WriteLine("°                                                                             °");
+            Console.Write("°        ");
             Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.SetCursorPosition(11, 2);
             Console.Write("MY SCORE");
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.SetCursorPosition(11, 4);
-            Console.Write("{0,6}", score);
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.SetCursorPosition(33, 2);
-            Console.Write("SUCCESS RATE");
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.SetCursorPosition(36, 4);
-            Console.Write("{0,3:0.#}%", successRate);
-            Console.ForegroundColor = ConsoleColor.DarkYellow;
-            Console.SetCursorPosition(63, 2);
-            Console.Write("HIGH SCORE");
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.SetCursorPosition(63, 4);
-            Console.WriteLine("{0,6}", highScore);
-
+            Console.Write("               SUCCESS RATE");
+            Console.Write("               HIGH SCORE");
+            Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("         °");
+
+            Console.WriteLine("°                                                                             °");
+
+            Console.Write("°        ");
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.Write("{0,7}", score);
+            Console.Write("                     {0,3:0.#}%", successRate);
+            Console.Write("                   {0,7}   ", highScore);
+            Console.ResetColor();
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("        °");
+
+            Console.WriteLine("°                                                                             °");
+            Console.WriteLine("°                                                                             °");
+
             Console.WriteLine("°                                                                             °");
             Console.ResetColor();
 

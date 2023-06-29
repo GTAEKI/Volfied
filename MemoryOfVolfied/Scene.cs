@@ -9,23 +9,41 @@ namespace MemoryOfVolfied
 	{
         public void ScorePointScore(string[,] mapBasic, float successRate,int score, int highScore)
         {
-
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°");
             Console.WriteLine("°                                                                             °");
-            Console.WriteLine("°        MY SCORE               SUCCESS RATE                HIGH SCORE        °");
             Console.WriteLine("°                                                                             °");
             Console.WriteLine("°                                                                             °");
+            Console.WriteLine("°                                                                             °");
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.SetCursorPosition(11, 2);
+            Console.Write("MY SCORE");
+            Console.ForegroundColor = ConsoleColor.White;
             Console.SetCursorPosition(11, 4);
             Console.Write("{0,6}", score);
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.SetCursorPosition(33, 2);
+            Console.Write("SUCCESS RATE");
+            Console.ForegroundColor = ConsoleColor.White;
             Console.SetCursorPosition(36, 4);
             Console.Write("{0,3:0.#}%", successRate);
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.SetCursorPosition(63, 2);
+            Console.Write("HIGH SCORE");
+            Console.ForegroundColor = ConsoleColor.White;
             Console.SetCursorPosition(63, 4);
             Console.WriteLine("{0,6}", highScore);
+
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("°                                                                             °");
+            Console.ResetColor();
+
         }
 
         public void StartScene()
-        { 
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+
             Console.WriteLine("┌────────────────────────────────────────────────────────────────────────────┐");
             Console.WriteLine("│                                                                            │");
             Console.WriteLine("│                                                                            │");
@@ -62,6 +80,7 @@ namespace MemoryOfVolfied
             Console.WriteLine("│                                                                            │");
             Console.WriteLine("│                                                                            │");
             Console.WriteLine("└────────────────────────────────────────────────────────────────────────────┘");
+            Console.ResetColor();
 
             Console.SetCursorPosition(2, 10);
             Console.WriteLine(" ┌──┐                                                                ┌──┐ ");
@@ -94,34 +113,70 @@ namespace MemoryOfVolfied
 
         public void GameClear()
         {
-            Console.WriteLine("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°");
-            Console.WriteLine("°          ┌───────┐  ┌─┐        ┌───────┐      ┌──┐      ┌───────┐          °");
-            Console.WriteLine("°          │ ┌─────┘  │ │        │ ┌─────┘     ┌┘  └┐     │  ┌─┐  │          °");
-            Console.WriteLine("°          │ │        │ │        │ └─────┐    ┌┘┌──┐└┐    │  └─┘  │          °");
-            Console.WriteLine("°          │ │        │ │        │ ┌─────┘   ┌┘ └──┘ └┐   │  ┌┐  ┐┘          °");
-            Console.WriteLine("°          │ └─────┐  │ └─────┐  │ └─────┐  ┌┘  ┌──┐  └┐  │  │└┐ └┐          °");
-            Console.WriteLine("°          └───────┘  └───────┘  └───────┘  └───┘  └───┘  └──┘ └──┘          °");
-            Console.WriteLine("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°");
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Green;
 
-            Console.ReadKey();
+            Console.WriteLine("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°");
+            Console.WriteLine("°                                                                            °");
+            Console.WriteLine("°                                                                            °");
+            Console.WriteLine("°                                                                            °");
+            Console.WriteLine("°                                                                            °");
+            Console.WriteLine("°                                                                            °");
+            Console.WriteLine("°                                                                            °");
+
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+
+            Console.SetCursorPosition(10, 1);
+            Console.WriteLine("┌───────┐  ┌─┐        ┌───────┐      ┌──┐      ┌───────┐");
+            Console.SetCursorPosition(10, 2);
+            Console.WriteLine("│ ┌─────┘  │ │        │ ┌─────┘     ┌┘  └┐     │  ┌─┐  │");
+            Console.SetCursorPosition(10, 3);
+            Console.WriteLine("│ │        │ │        │ └─────┐    ┌┘┌──┐└┐    │  └─┘  │");
+            Console.SetCursorPosition(10, 4);
+            Console.WriteLine("│ │        │ │        │ ┌─────┘   ┌┘ └──┘ └┐   │  ┌┐  ┐┘");
+            Console.SetCursorPosition(10, 5);
+            Console.WriteLine("│ └─────┐  │ └─────┐  │ └─────┐  ┌┘  ┌──┐  └┐  │  │└┐ └┐");
+            Console.SetCursorPosition(10, 6);
+            Console.WriteLine("└───────┘  └───────┘  └───────┘  └───┘  └───┘  └──┘ └──┘");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°");
+            Console.ResetColor();
         }
 
         public void GameOverScene()
         {
-            Console.WriteLine("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°");
-            Console.WriteLine("°               ┌─┐         ┌───────┐   ┌───────┐   ┌───────┐                °");
-            Console.WriteLine("°               │ │         │  ┌─┐  │   │ ┌─────┘   │ ┌─────┘                °");
-            Console.WriteLine("°               │ │         │  │ │  │   │ └─────┐   │ └─────┐                °");
-            Console.WriteLine("°               │ │         │  │ │  │   └─────┐ │   │ ┌─────┘                °");
-            Console.WriteLine("°               │ └─────┐   │  └─┘  │   ┌─────┘ │   │ └─────┐                °");
-            Console.WriteLine("°               └───────┘   └───────┘   └───────┘   └───────┘                °");
-            Console.WriteLine("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°");
+            Console.Clear();
+            Console.ForegroundColor = ConsoleColor.Green;
 
-            Console.ReadKey();
+            Console.WriteLine("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°");
+            Console.WriteLine("°                                                                            °");
+            Console.WriteLine("°                                                                            °");
+            Console.WriteLine("°                                                                            °");
+            Console.WriteLine("°                                                                            °");
+            Console.WriteLine("°                                                                            °");
+            Console.WriteLine("°                                                                            °");
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+
+            Console.SetCursorPosition(16, 1);
+            Console.WriteLine("┌─┐         ┌───────┐   ┌───────┐   ┌───────┐");
+            Console.SetCursorPosition(16, 2);
+            Console.WriteLine("│ │         │  ┌─┐  │   │ ┌─────┘   │ ┌─────┘");
+            Console.SetCursorPosition(16, 3);
+            Console.WriteLine("│ │         │  │ │  │   │ └─────┐   │ └─────┐");
+            Console.SetCursorPosition(16, 4);
+            Console.WriteLine("│ │         │  │ │  │   └─────┐ │   │ ┌─────┘");
+            Console.SetCursorPosition(16, 5);
+            Console.WriteLine("│ └─────┐   │  └─┘  │   ┌─────┘ │   │ └─────┐");
+            Console.SetCursorPosition(16, 6);
+            Console.WriteLine("└───────┘   └───────┘   └───────┘   └───────┘");
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°");
+            Console.ResetColor();
         }
 
         public void ScoreRecordScene(ref string name, ref int score, ref List<int> scoreRecord, ref Dictionary<int, string> infoRecord)
         {
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("°                                                                            °");
             Console.WriteLine("°                                                                            °");
             Console.WriteLine("°                                                                            °");
@@ -150,6 +205,8 @@ namespace MemoryOfVolfied
             Console.WriteLine("°                                                                            °");
             Console.WriteLine("°                                                                            °");
             Console.WriteLine("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°");
+            Console.ResetColor();
+
 
             scoreRecord.Sort();
             scoreRecord.Reverse();

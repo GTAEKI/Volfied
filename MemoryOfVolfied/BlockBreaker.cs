@@ -2,6 +2,8 @@
 using System.Diagnostics.Metrics;
 using System.Threading;
 using System.Timers;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace MemoryOfVolfied
 {
@@ -16,7 +18,6 @@ namespace MemoryOfVolfied
             Random random = new Random();
             int bossX = 0, bossY = 0;
             
-
             if (key.KeyChar == 'W' || key.KeyChar == 'w')
             {
                 switch (mapBasic[myLocationY - 1, myLocationX])
@@ -116,7 +117,6 @@ namespace MemoryOfVolfied
                         ChangeWall(ref mapBasic, "⊙", "▣");
                         break;
 
-
                     case "Ω":
                         lose = true;
                         break;
@@ -178,7 +178,6 @@ namespace MemoryOfVolfied
                         //Console.WriteLine("움직일 수 없습니다.");
                         break;
                 }
-
             }
             else if (key.KeyChar == 'D' || key.KeyChar == 'd')
             {
@@ -275,7 +274,6 @@ namespace MemoryOfVolfied
         }
         // } Flood Fill 알고리즘
 
-
         // 벽을 교체해주는 함수, find에 들어온 기호를 replace기호로 변경{
         private void ChangeWall(ref string[,] mapBasic, string find, string replace)
         {
@@ -311,7 +309,6 @@ namespace MemoryOfVolfied
              // }보스몬스터 위치 저장         
         }//CheckPoint
         // } 적 보스 포인(x,y)위치값을 저장해주는 함수
-
     }
 }
 

@@ -2,6 +2,8 @@
 using System.Diagnostics;
 using System.Security.Cryptography;
 using static System.Formats.Asn1.AsnWriter;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace MemoryOfVolfied
 {
@@ -20,9 +22,7 @@ namespace MemoryOfVolfied
             Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("         °");
-
             Console.WriteLine("°                                                                             °");
-
             Console.Write("°        ");
             Console.ForegroundColor = ConsoleColor.White;
             Console.Write("{0,7}", score);
@@ -31,13 +31,10 @@ namespace MemoryOfVolfied
             Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("        °");
-
             Console.WriteLine("°                                                                             °");
             Console.WriteLine("°                                                                             °");
-
             Console.WriteLine("°                                                                             °");
             Console.ResetColor();
-
         }
 
         public void StartScene()
@@ -174,7 +171,7 @@ namespace MemoryOfVolfied
             Console.ResetColor();
         }
 
-        public void ScoreRecordScene(ref string name, ref int score, ref List<int> scoreRecord, ref Dictionary<int, string> infoRecord)
+        public void ScoreRecordScene(ref string name, ref int score, ref List<int> scoreRecord, ref Dictionary<int, string> infoRecord, ref List<data> _data)
         {
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("°                                                                            °");
@@ -229,15 +226,28 @@ namespace MemoryOfVolfied
             Console.SetCursorPosition(23, 30);
             Console.Write("6st");
 
-            for(int i = 0; i < scoreRecord.Count; i++)
+            //6위 까지만 기록
+            if (scoreRecord.Count > 6)
             {
-                Console.SetCursorPosition(32, (i*2)+20);
-                Console.Write("{0}", scoreRecord[i]);
-                Console.SetCursorPosition(45, (i*2)+20);
-                Console.Write("{0}", infoRecord[scoreRecord[i]]);
-
+                for (int i = 0; i < 6; i++)
+                {
+                    Console.SetCursorPosition(32, (i * 2) + 20);
+                    Console.Write("{0}", scoreRecord[i]);
+                    Console.SetCursorPosition(45, (i * 2) + 20);
+                    Console.Write("{0}", infoRecord[scoreRecord[i]]);
+                }
             }
-
+            else
+            {
+                for (int i = 0; i < scoreRecord.Count; i++)
+                {
+                    Console.SetCursorPosition(32, (i * 2) + 20);
+                    Console.Write("{0}", scoreRecord[i]);
+                    Console.SetCursorPosition(45, (i * 2) + 20);
+                    Console.Write("{0}", infoRecord[scoreRecord[i]]);
+                }
+            }
+            //6위 까지만 기록
 
             scoreRecord.Add(score);
             Console.SetCursorPosition(28, 12);
@@ -250,69 +260,63 @@ namespace MemoryOfVolfied
             Console.SetCursorPosition(50, 14);
             name = Console.ReadLine();
             Console.ResetColor();
-            infoRecord[score] = name;
 
+            infoRecord[score] = name;
             scoreRecord.Sort();
             scoreRecord.Reverse();
 
+            // 순위 기록화면 클리어
             for (int i = 0; i < scoreRecord.Count; i++)
             {
                 Console.SetCursorPosition(32, (i * 2) + 20);
                 Console.Write("                                      ");
 
             }
+            // 순위 기록화면 클리어
 
-            for (int i = 0; i < scoreRecord.Count; i++)
+
+            //6위 까지만 기록
+            if (scoreRecord.Count > 6)
             {
-                Console.SetCursorPosition(32, (i * 2) + 20);
-                Console.Write("{0}", scoreRecord[i]);
-                Console.SetCursorPosition(45, (i * 2) + 20);
-                Console.Write("{0}", infoRecord[scoreRecord[i]]);
-
+                for (int i = 0; i < 6; i++)
+                {
+                    Console.SetCursorPosition(32, (i * 2) + 20);
+                    Console.Write("{0}", scoreRecord[i]);
+                    Console.SetCursorPosition(45, (i * 2) + 20);
+                    Console.Write("{0}", infoRecord[scoreRecord[i]]);
+                }
             }
+            else
+            {
+                for (int i = 0; i < scoreRecord.Count; i++)
+                {
+                    Console.SetCursorPosition(32, (i * 2) + 20);
+                    Console.Write("{0}", scoreRecord[i]);
+                    Console.SetCursorPosition(45, (i * 2) + 20);
+                    Console.Write("{0}", infoRecord[scoreRecord[i]]);
+                }
+            }
+            //6위 까지만 기록
+
+                _data = new List<data>();
+            //for(int i = 0; i < scoreRecord.Count; i++)
+            //{
+                _data.Add(new data()
+                {
+                    score_ = scoreRecord,
+                    infoRecord_ = infoRecord
+                });
+
+            //}
+
+            string json = JsonConvert.SerializeObject(_data.ToArray());
+
+            //write string to file
+            System.IO.File.WriteAllText(@"/Users/baekyungtaek/Programer/c_shap/Volfied/path.txt", json);
 
             score = 0;
             Console.ReadKey();
-
-
         }
-
-        //public void RoundScene()
-        //{
-        //    Console.WriteLine("┌────────────────────────────────────────────────────────────────────────────┐");
-        //    Console.WriteLine("│                                                                            │");
-        //    Console.WriteLine("│                                                                            │");
-        //    Console.WriteLine("│                                                                            │");
-        //    Console.WriteLine("│                                                                            │");
-        //    Console.WriteLine("│                                                                            │");
-        //    Console.WriteLine("│                                                                            │");
-        //    Console.WriteLine("│                                                                            │");
-        //    Console.WriteLine("│                                                                            │");
-        //    Console.WriteLine("│                                                                            │");
-        //    Console.WriteLine("│                                                                            │");
-        //    Console.WriteLine("│                                                                            │");
-        //    Console.WriteLine("│                                                                            │");
-        //    Console.WriteLine("│                                                                            │");
-        //    Console.WriteLine("│                                                                            │");
-        //    Console.WriteLine("│                                                                            │");
-        //    Console.WriteLine("│                                                                            │");
-        //    Console.WriteLine("│                                                                            │");
-        //    Console.WriteLine("│                                                                            │");
-        //    Console.WriteLine("│                                                                            │");
-        //    Console.WriteLine("│                                                                            │");
-        //    Console.WriteLine("│                                                                            │");
-        //    Console.WriteLine("│                                                                            │");
-        //    Console.WriteLine("│                                                                            │");
-        //    Console.WriteLine("│                                                                            │");
-        //    Console.WriteLine("│                                                                            │");
-        //    Console.WriteLine("│                                                                            │");
-        //    Console.WriteLine("│                                                                            │");
-        //    Console.WriteLine("│                                                                            │");
-        //    Console.WriteLine("└────────────────────────────────────────────────────────────────────────────┘");
-
-
-        //    Console.ReadKey();
-        //}
     }
 }
 

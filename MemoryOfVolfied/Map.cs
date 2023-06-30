@@ -2,6 +2,8 @@
 using System.Diagnostics.Metrics;
 using System.Threading;
 using System.Timers;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace MemoryOfVolfied
 {
@@ -53,7 +55,6 @@ namespace MemoryOfVolfied
         }//createMap
         // 초기 맵 배열에 벽과 보스, 내 캐릭터를 입력하는 함수
 
-
         //콘솔창에 배열에있는 맵을 프린트하여 보여주는 함수
         public void PrintMap(ref string[,] mapBasic)
         {     
@@ -69,8 +70,25 @@ namespace MemoryOfVolfied
                     }
                     else if (mapBasic[y, x] == "⊙")
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        
+                        switch (random.Next(4)) //보스 색 랜덤으로 변화
+                        {
+                            case 0:
+                                Console.ForegroundColor = ConsoleColor.Magenta;
+                                break;
+                            case 1:
+                                Console.ForegroundColor = ConsoleColor.Blue;
+                                break;
+                            case 2:
+                                Console.ForegroundColor = ConsoleColor.Yellow;
+                                break;
+                            case 3:
+                                Console.ForegroundColor = ConsoleColor.Red;
+                                break;
+                            default:
+                                break;
+                        }
+                        //Console.ForegroundColor = ConsoleColor.Red;
+
                         Console.Write("{0} ", mapBasic[y, x]);
                         Console.ResetColor();
                     }
@@ -164,24 +182,25 @@ namespace MemoryOfVolfied
                     }
                     else if (mapBasic[y,x] == "Ω")
                     {
-                        switch (random.Next(4))
-                        {
-                            case 0:
-                                Console.ForegroundColor = ConsoleColor.Magenta;
-                                break;
-                            case 1:
-                                Console.ForegroundColor = ConsoleColor.Blue;
-                                break;
-                            case 2:
-                                Console.ForegroundColor = ConsoleColor.Yellow;
-                                break;
-                            case 3:
-                                Console.ForegroundColor = ConsoleColor.Red;
-                                break;
-                            default:
-                                break;
-                        }
-                        
+                        //switch (random.Next(4)) //보스 색 랜덤으로 변화
+                        //{
+                        //    case 0:
+                        //        Console.ForegroundColor = ConsoleColor.Magenta;
+                        //        break;
+                        //    case 1:
+                        //        Console.ForegroundColor = ConsoleColor.Blue;
+                        //        break;
+                        //    case 2:
+                        //        Console.ForegroundColor = ConsoleColor.Yellow;
+                        //        break;
+                        //    case 3:
+                        //        Console.ForegroundColor = ConsoleColor.Red;
+                        //        break;
+                        //    default:
+                        //        break;
+                        //}
+                        Console.ForegroundColor = ConsoleColor.Red;
+
                         Console.Write("{0} ", mapBasic[y, x]);
                         Console.ResetColor();
                     }
@@ -194,26 +213,6 @@ namespace MemoryOfVolfied
             }//for y
         }//printMap
         //콘솔창에 배열에 있는 맵을 프린트하여 보여주는 함수
-
-        ////콘솔창에 배열에있는 맵을 프린트하여 보여주는 함수
-        //public void BossPrintMap(ref string[,] mapBasic)
-        //{
-        //    for (int y = 0; y < MAP_SIZE_Y; y++)
-        //    {
-        //        //Console.SetCursorPosition(0, y);
-        //        for (int x = 0; x < MAP_SIZE_X; x++)
-        //        {
-        //            Console.SetCursorPosition(x, y);
-        //            if (mapBasic[y,x]== "Ω")
-        //            {
-                        
-        //                Console.Write("{0} ", mapBasic[y, x]);
-
-        //            }
-        //        }
-        //    }//for y
-        //}//printMap
-        ////콘솔창에 배열에 있는 맵을 프린트하여 보여주는 함수
 
         // 땅 점령률을 계산하는 함수
         public float CalculatePercent(string[,] mapBasic)
@@ -241,7 +240,7 @@ namespace MemoryOfVolfied
 
         // 점수 계산하는 함수
         public int CalculateScore(string[,] mapBasic,ref int remainCount)
-        {
+        { 
             int count = 0;
             int score_ = 0;
             int area = (MAP_SIZE_Y - 4) * (MAP_SIZE_X - 4);

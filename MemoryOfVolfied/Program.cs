@@ -57,7 +57,6 @@ namespace MemoryOfVolfied
                     infoRecord = item.infoRecord_;
                 }
             }
-
             sceneManager.StartScene(); //첫 화면
             //Console.SetWindowSize(MAP_SIZE_X*2, MAP_SIZE_Y); //window에서 플레이할때 (mac에서 지원 안함)
 

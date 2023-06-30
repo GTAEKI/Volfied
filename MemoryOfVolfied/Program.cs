@@ -12,12 +12,12 @@ namespace MemoryOfVolfied
 {
     internal class Program
     {
-        static Map firstRoundMap = new Map(); //첫번째 라운드 맵 객체 생성
-        static Scene sceneManager = new Scene(); //Scene관리 객체
+        static Map firstRoundMap = new Map(); // 첫번째 라운드 맵 객체 생성
+        static Scene sceneManager = new Scene(); // Scene관리 객체
         static List<int> scoreRecord = new List<int>(); // Score 리스트에 저장(정렬을 위해서 사용)
         static Dictionary<int, string> infoRecord = new Dictionary<int,string>(); // key값 을 score로 저장후, 닉네임을 value
-        static System.Threading.Timer timer; //타이머 선언
-        static bool lose = false; // lose 변수 (아래쪽
+        static System.Threading.Timer timer; // 타이머 선언
+        static bool lose = false; // lose 변수 (패배시 lose 값으로 변경)
 
         static string name = default;
         static int score = default, remaincount = default, highScore = default;
@@ -29,8 +29,12 @@ namespace MemoryOfVolfied
 
         static bool IsClockwise = true;
 
+        // Json파일 읽어오는 구문 <<******* 다른컴퓨터에서 경로 수정 필요 ********
+        // Scene클래스 322번째 줄도 path 수정 필요
         static string json = System.IO.File.ReadAllText(@"/Users/baekyungtaek/Programer/c_shap/Volfied/path.txt");
         static List<data> _data = JsonConvert.DeserializeObject<List<data>>(json);
+        // Json파일 읽어오는 구문
+
 
         //보스몹 움직이는 방향
         enum Direction
@@ -54,7 +58,7 @@ namespace MemoryOfVolfied
                 }
             }
 
-            sceneManager.StartScene();
+            sceneManager.StartScene(); //첫 화면
             //Console.SetWindowSize(MAP_SIZE_X*2, MAP_SIZE_Y); //window에서 플레이할때 (mac에서 지원 안함)
 
             while (true)// game restart

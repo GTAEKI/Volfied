@@ -70,7 +70,7 @@ namespace MemoryOfVolfied
                     }
                     else if (mapBasic[y, x] == "⊙")
                     {
-                        switch (random.Next(4)) //보스 색 랜덤으로 변화
+                        switch (random.Next(4)) //내가 그리는 선 색상 랜덤으로 변화
                         {
                             case 0:
                                 Console.ForegroundColor = ConsoleColor.Magenta;
@@ -182,23 +182,6 @@ namespace MemoryOfVolfied
                     }
                     else if (mapBasic[y,x] == "Ω")
                     {
-                        //switch (random.Next(4)) //보스 색 랜덤으로 변화
-                        //{
-                        //    case 0:
-                        //        Console.ForegroundColor = ConsoleColor.Magenta;
-                        //        break;
-                        //    case 1:
-                        //        Console.ForegroundColor = ConsoleColor.Blue;
-                        //        break;
-                        //    case 2:
-                        //        Console.ForegroundColor = ConsoleColor.Yellow;
-                        //        break;
-                        //    case 3:
-                        //        Console.ForegroundColor = ConsoleColor.Red;
-                        //        break;
-                        //    default:
-                        //        break;
-                        //}
                         Console.ForegroundColor = ConsoleColor.Red;
 
                         Console.Write("{0} ", mapBasic[y, x]);

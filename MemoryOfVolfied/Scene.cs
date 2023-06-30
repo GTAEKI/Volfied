@@ -9,6 +9,7 @@ namespace MemoryOfVolfied
 {
 	public class Scene
 	{
+        //게임 중 위쪽 현재스코어 / 점령률 / 최고스코어 표현 Scene
         public void ScorePointScore(string[,] mapBasic, float successRate, int score, int highScore)
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -36,7 +37,9 @@ namespace MemoryOfVolfied
             Console.WriteLine("°                                                                             °");
             Console.ResetColor();
         }
+        //게임 중 위쪽 현재스코어 / 점령률 / 최고스코어 표현 Scene
 
+        // 게임 시작씬
         public void StartScene()
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -107,7 +110,9 @@ namespace MemoryOfVolfied
 
             Console.ReadKey();
 		}
+        // 게임 시작씬
 
+        // 게임 종료시(이겼을 경우)
         public void GameClear()
         {
             Console.Clear();
@@ -139,7 +144,9 @@ namespace MemoryOfVolfied
             Console.WriteLine("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°");
             Console.ResetColor();
         }
+        // 게임 종료시(이겼을 경우)
 
+        // 게임 종료시(졌을 경우)
         public void GameOverScene()
         {
             Console.Clear();
@@ -170,7 +177,9 @@ namespace MemoryOfVolfied
             Console.WriteLine("°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°°");
             Console.ResetColor();
         }
+        // 게임 종료시(졌을 경우)
 
+        // 게임 종료시(점수 나타내는 Scene / 이겼을 때, 졌을 때 동일)
         public void ScoreRecordScene(ref string name, ref int score, ref List<int> scoreRecord, ref Dictionary<int, string> infoRecord, ref List<data> _data)
         {
             Console.ForegroundColor = ConsoleColor.Green;
@@ -193,7 +202,7 @@ namespace MemoryOfVolfied
             Console.WriteLine("°                                                                            °");
             Console.WriteLine("°                                                                            °");
             Console.WriteLine("°                                                                            °");
-            Console.WriteLine("°                                                                            °");                                
+            Console.WriteLine("°                                                                            °");
             Console.WriteLine("°                                                                            °");
             Console.WriteLine("°                                                                            °");
             Console.WriteLine("°                                                                            °");
@@ -207,7 +216,7 @@ namespace MemoryOfVolfied
 
             scoreRecord.Sort();
             scoreRecord.Reverse();
-           
+
 
             Console.SetCursorPosition(33, 18);
             Console.Write("SCORE");
@@ -254,7 +263,7 @@ namespace MemoryOfVolfied
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("ENTER YOUR INITIALS !!");
             Console.SetCursorPosition(23, 14);
-            Console.WriteLine("SCORE : {0}",score);
+            Console.WriteLine("SCORE : {0}", score);
             Console.SetCursorPosition(43, 14);
             Console.WriteLine("NAME : ");
             Console.SetCursorPosition(50, 14);
@@ -298,25 +307,28 @@ namespace MemoryOfVolfied
             }
             //6위 까지만 기록
 
-                _data = new List<data>();
-            //for(int i = 0; i < scoreRecord.Count; i++)
-            //{
-                _data.Add(new data()
-                {
-                    score_ = scoreRecord,
-                    infoRecord_ = infoRecord
-                });
-
-            //}
+            //json파일에 내용 추가하는 구문
+            _data = new List<data>();
+            _data.Add(new data()
+            {
+                score_ = scoreRecord,
+                infoRecord_ = infoRecord
+            });
 
             string json = JsonConvert.SerializeObject(_data.ToArray());
 
-            //write string to file
+            //path.txt파일에 내용 추가하는 구문 << ******* 다른컴퓨터에서 경로 수정 필요 ********
+            // Program클래스(main함수 내) 32번째 줄도 path 수정 필요
             System.IO.File.WriteAllText(@"/Users/baekyungtaek/Programer/c_shap/Volfied/path.txt", json);
+            //json파일에 내용 추가하는 구문
+
 
             score = 0;
             Console.ReadKey();
         }
+        // 게임 종료시(점수 나타내는 Scene / 이겼을 때, 졌을 때 동일)
+
+
     }
 }
 

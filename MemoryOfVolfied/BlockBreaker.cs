@@ -18,11 +18,11 @@ namespace MemoryOfVolfied
             Random random = new Random();
             int bossX = 0, bossY = 0;
             
-            if (key.KeyChar == 'W' || key.KeyChar == 'w')
+            if (key.KeyChar == 'W' || key.KeyChar == 'w') //W키를 눌렀을때
             {
-                switch (mapBasic[myLocationY - 1, myLocationX])
+                switch (mapBasic[myLocationY - 1, myLocationX]) // 위쪽 한칸이
                 {
-                    case " ":
+                    case " ": //공백이라면
                         if (mapBasic[myLocationY, myLocationX + 1] == "▣" && mapBasic[myLocationY, myLocationX - 1] == "▣")
                         {
                             mapBasic[myLocationY - 1, myLocationX] = "♀";
@@ -36,7 +36,7 @@ namespace MemoryOfVolfied
                         myLocationY -= 1;
                             break;
 
-                    case "▣":                     
+                    case "▣": // 벽이라면                     
                         if (mapBasic[myLocationY, myLocationX + 1] == " " && mapBasic[myLocationY, myLocationX - 1] == " ")
                         {
                             mapBasic[myLocationY - 1, myLocationX] = "♀";
@@ -63,7 +63,7 @@ namespace MemoryOfVolfied
                         ChangeWall(ref mapBasic, "⊙", "▣");
                         break;
 
-                    case "Ω":
+                    case "Ω": //보스 몬스터라면
                         lose = true;
                         break;
 
@@ -72,12 +72,12 @@ namespace MemoryOfVolfied
                         break;
                 }
             }
-            else if (key.KeyChar == 'A' || key.KeyChar == 'a')
+            else if (key.KeyChar == 'A' || key.KeyChar == 'a') // a키를 눌렀을때
             {
 
-                switch (mapBasic[myLocationY, myLocationX-1])
+                switch (mapBasic[myLocationY, myLocationX-1]) // 왼쪽 한칸이
                 {
-                    case " ":
+                    case " ": //공백이라면
                         if (mapBasic[myLocationY-1, myLocationX] == "▣" && mapBasic[myLocationY+1, myLocationX] == "▣")
                         {
                             mapBasic[myLocationY, myLocationX-1] = "♀";
@@ -90,7 +90,7 @@ namespace MemoryOfVolfied
                         myLocationX -= 1;
                         break;
 
-                    case "▣":
+                    case "▣": //벽이라면
                         if (mapBasic[myLocationY - 1, myLocationX] == " " && mapBasic[myLocationY + 1, myLocationX] == " ")
                         {
                             mapBasic[myLocationY, myLocationX - 1] = "♀";
@@ -117,7 +117,7 @@ namespace MemoryOfVolfied
                         ChangeWall(ref mapBasic, "⊙", "▣");
                         break;
 
-                    case "Ω":
+                    case "Ω": //보스몹이라면
                         lose = true;
                         break;
 
@@ -126,11 +126,11 @@ namespace MemoryOfVolfied
                         break;
                 }
             }
-            else if (key.KeyChar == 'S' || key.KeyChar == 's')
+            else if (key.KeyChar == 'S' || key.KeyChar == 's') // S를 눌렀을때
             {
-                switch (mapBasic[myLocationY + 1, myLocationX])
+                switch (mapBasic[myLocationY + 1, myLocationX]) // 한칸 아래쪽이
                 {
-                    case " ":
+                    case " ": // 공백이라면
                         if (mapBasic[myLocationY, myLocationX + 1] == "▣" && mapBasic[myLocationY, myLocationX - 1] == "▣")
                         {
                             mapBasic[myLocationY + 1, myLocationX] = "♀";
@@ -143,7 +143,7 @@ namespace MemoryOfVolfied
                         myLocationY += 1;
                         break;
 
-                    case "▣":
+                    case "▣": // 벽이라면
                         if (mapBasic[myLocationY, myLocationX + 1] == " " && mapBasic[myLocationY, myLocationX - 1] == " ")
                         {
                             mapBasic[myLocationY + 1, myLocationX] = "♀";
@@ -170,7 +170,7 @@ namespace MemoryOfVolfied
                         ChangeWall(ref mapBasic, "⊙", "▣");
                         break;
 
-                    case "Ω":
+                    case "Ω": // 보스몬스터라면
                         lose = true;
                         break;
 
@@ -179,11 +179,11 @@ namespace MemoryOfVolfied
                         break;
                 }
             }
-            else if (key.KeyChar == 'D' || key.KeyChar == 'd')
+            else if (key.KeyChar == 'D' || key.KeyChar == 'd') //D키를 눌렀을때
             {
-                switch (mapBasic[myLocationY, myLocationX + 1])
+                switch (mapBasic[myLocationY, myLocationX + 1]) // 오른쪽 칸이
                 {
-                    case " ":
+                    case " ": //공백이라면
 
                         if (mapBasic[myLocationY+1, myLocationX] == "▣" && mapBasic[myLocationY-1, myLocationX] == "▣")
                         {
@@ -197,7 +197,7 @@ namespace MemoryOfVolfied
                         myLocationX += 1;
                         break;
 
-                    case "▣":
+                    case "▣": //벽이라면
                         if (mapBasic[myLocationY + 1, myLocationX] == " " && mapBasic[myLocationY - 1, myLocationY] == " ")
                         {
                             mapBasic[myLocationY, myLocationX + 1] = "♀";
@@ -224,7 +224,7 @@ namespace MemoryOfVolfied
                         ChangeWall(ref mapBasic, "⊙", "▣");
                         break;
 
-                    case "Ω":
+                    case "Ω": //보스몬스터라면
                         lose = true;
                         break;
 

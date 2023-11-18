@@ -2,7 +2,7 @@
 using System.Diagnostics.Metrics;
 using System.Threading;
 using System.Timers;
-using static System.Formats.Asn1.AsnWriter;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Text.Json;
@@ -29,6 +29,7 @@ namespace MemoryOfVolfied
 
         static bool IsClockwise = true;
 
+
         // Json파일 읽어오는 구문 <<******* 다른컴퓨터에서 경로 수정 필요 ********
         // Scene클래스 322번째 줄도 path 수정 필요
         static string json = System.IO.File.ReadAllText(@"/Users/baekyungtaek/Programer/c_shap/Volfied/path.txt");
@@ -48,7 +49,7 @@ namespace MemoryOfVolfied
 
         static void Main(string[] args)
         {
-            if(_data != null)
+            if (_data != null)
             {
                 foreach (var item in _data)
                 {
